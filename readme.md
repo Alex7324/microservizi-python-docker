@@ -1,8 +1,8 @@
-# Modern Microservices Architecture 🚀
+# Modern Microservices Architecture 
 
 This repository contains a proof-of-concept for a modern, containerized microservices architecture. It demonstrates how to decouple application logic into independent, scalable services that communicate over a virtual network.
 
-## 🏗 System Architecture
+##  System Architecture
 
 The ecosystem is composed of 4 independent containers:
 
@@ -11,14 +11,14 @@ The ecosystem is composed of 4 independent containers:
 3. **Orders API (FastAPI):** A stateless REST API that demonstrates service-to-service communication by querying the Users API over the internal Docker network.
 4. **Database (PostgreSQL):** A persistent relational database equipped with Docker Volumes to prevent data loss upon container destruction.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - **Backend:** Python 3.10, FastAPI, Uvicorn, Requests
 - **Frontend:** Streamlit
 - **Database:** PostgreSQL, Psycopg2
 - **DevOps:** Docker, Docker Compose
 
-## 🚀 How to Run locally
+##  How to Run locally
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
@@ -37,7 +37,7 @@ Make sure you have Docker and Docker Compose installed on your machine.
    - **Users API Swagger Docs:** `http://localhost:8001/docs`
    - **Orders API Swagger Docs:** `http://localhost:8002/docs`
 
-## 🧠 Core Concepts Demonstrated
+##  Core Concepts Demonstrated
 - Monolith to Microservices decoupling.
 - Containerization and Virtual Networking (Docker Compose).
 - Stateful vs Stateless application design.
