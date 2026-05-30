@@ -11,6 +11,11 @@ services:
       - "5432:5432"
     volumes:
       - dati_database:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_UTENTE} -d ${DB_NOME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   frontend:
     build: ./frontend
@@ -24,12 +29,13 @@ services:
     build: ./api_utenti
     ports:
       - "8001:8000"
-    depends_on:
-      - db
     environment:
       - DB_UTENTE=${DB_UTENTE}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NOME=${DB_NOME}
+    depends_on:
+      db:
+        condition: service_healthy
 
   api-ordini:
     build: ./api_ordini

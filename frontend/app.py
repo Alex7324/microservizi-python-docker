@@ -40,3 +40,20 @@ with col2:
             st.json(dati) # Mostra il JSON in modo elegante e formattato
         else:
             st.error("Ordine non trovato")
+
+st.markdown("---")
+
+st.header("📋 Lista di Tutti gli Utenti")
+
+# Un bottone per ricaricare la lista
+if st.button("Aggiorna Lista Utenti"):
+    risposta = requests.get("http://api-utenti:8000/utenti/")
+    
+    if risposta.status_code == 200:
+        utenti = risposta.json()
+        if utenti:
+            st.dataframe(utenti, use_container_width=True)
+        else:
+            st.info("Nessun utente presente nel database. Aggiungine uno sopra!")
+    else:
+        st.error("Errore nel recupero degli utenti")

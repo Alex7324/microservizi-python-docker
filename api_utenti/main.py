@@ -71,3 +71,22 @@ def crea_utente(utente: NuovoUtente):
     cursor.close()
     conn.close()
     return {"messaggio": "Utente creato con successo!", "nuovo_id": nuovo_id}
+
+@app.get("/utenti/")
+def get_tutti_utenti():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT id, nome, ruolo FROM utenti;")
+    righe = cur.fetchall()
+    cur.close()
+    conn.close()
+    
+    lista_utenti = []
+    for riga in righe:
+        lista_utenti.append({
+            "id": riga[0], 
+            "nome": riga[1], 
+            "ruolo": riga[2]
+        })
+        
+    return lista_utenti
