@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DB_UTENTE}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NOME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - dati_database:/var/lib/postgresql/data
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api-utenti
+      - api-ordini
+  
+  api-utenti:
+    build: ./api_utenti
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_UTENTE=${DB_UTENTE}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NOME=${DB_NOME}
+
+  api-ordini:
+    build: ./api_ordini
+    ports:
+      - "8002:8000" 
+
+volumes:
+  dati_database:
